@@ -164,7 +164,12 @@
                 }),
                 success:function(result){//只有操作成功才会到这一步吗
                     if (result.code == 1) {
-                        alert(result.msg);
+                        var yesorno = confirm("注册"+result.msg+"是否登录");
+                        if(yesorno == true){
+                            window.location.href = "${pageContext.request.contextPath}/to_login";//依然是用controller控制页面跳转不是直接到指定页面
+                        }else{
+                            window.location.reload();
+                        }
                     }else{
                         alert(result.msg+"请重试");
                     }

@@ -1,7 +1,6 @@
 package cn.majestyz.service;
 
 import cn.majestyz.entity.TUser;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by MeiZhen on 2019/4/20.

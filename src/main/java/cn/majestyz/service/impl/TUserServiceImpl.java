@@ -1,8 +1,8 @@
 package cn.majestyz.service.impl;
 
-import cn.majestyz.mapper.TUserMapper;
 import cn.majestyz.entity.TUser;
 import cn.majestyz.entity.TUserExample;
+import cn.majestyz.mapper.TUserMapper;
 import cn.majestyz.service.TUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

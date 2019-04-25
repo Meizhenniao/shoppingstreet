@@ -38,8 +38,8 @@
         </javaClientGenerator>
 
         <!--数据库中对应的表-->
-        <table tableName="t_user" />
-        <!--<table tableName="t_cart" />-->
+        <!--<table tableName="t_user" />-->
+        <!--<table tableName="t_cartitem" />-->
         <!--<table tableName="t_goods" />-->
     </context>
 </generatorConfiguration>

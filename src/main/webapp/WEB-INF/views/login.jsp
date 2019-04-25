@@ -110,7 +110,6 @@
     $("#login").click(function () {
         var in_username = $("#username").val();
         var in_password = $("#password").val();
-        alert("login");
         if(in_username == null){//???会不会有问题
             alert("请输入用户名");
         }else if(in_password ==  null){
@@ -127,7 +126,7 @@
                 success:function (result) {
                     if(result.code == 1){
                         alert(result.msg);
-                        window.location.href = "${pageContext.request.contextPath}/to_index";//???
+                        window.location.href = "${pageContext.request.contextPath}/to_index";//依然是用controller控制页面跳转不是直接到指定页面
                     }else{
                         alert("登录失败")
                     }
