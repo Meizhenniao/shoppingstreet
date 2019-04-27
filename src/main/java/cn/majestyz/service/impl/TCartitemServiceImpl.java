@@ -36,4 +36,62 @@ public class TCartitemServiceImpl implements TCartitemService{
         example.createCriteria().andUseridEqualTo(userid);
         return cartitemMapper.selectByExample(example);
     }
+
+    @Override
+    public TCartitem quertCartItem(int goodsitemid, int userid) {
+        TCartitemExample example = new TCartitemExample();
+        example.createCriteria().andGoodsidEqualTo(goodsitemid).andUseridEqualTo(userid);
+        List<TCartitem> cartitems = cartitemMapper.selectByExample(example);
+        if(cartitems.size() == 0){
+            System.out.println("这个商品在我的购物车里是没有的");
+            return null;
+        }else {
+            System.out.println("曾经加过这个商品,商品数量目前是："+cartitems.get(0).getGoodsamount());
+            return cartitems.get(0);
+        }
+    }
+
+    @Override
+    public boolean newCartItem(int goodsitemid, int userid) {
+        TCartitem cartitem = new TCartitem();
+        cartitem.setGoodsid(goodsitemid);
+        cartitem.setUserid(userid);
+        cartitem.setGoodsamount(1);
+        int a = cartitemMapper.insertSelective(cartitem);
+        if(a == 1) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addGoodsAmount(int goodsid,int userid,int goodsamount) {
+        TCartitem cartitem = new TCartitem();
+        cartitem.setGoodsamount(goodsamount+1);
+        TCartitemExample example = new TCartitemExample();
+        example.createCriteria().andGoodsidEqualTo(goodsid).andUseridEqualTo(userid);
+        int a = cartitemMapper.updateByExampleSelective(cartitem,example);
+        if(a==1) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean subGoodsAmount(int goodsid,int userid,int goodsamount) {
+        TCartitem cartitem = new TCartitem();
+        cartitem.setGoodsamount(goodsamount-1);
+        TCartitemExample example = new TCartitemExample();
+        example.createCriteria().andGoodsidEqualTo(goodsid).andUseridEqualTo(userid);
+        int a = cartitemMapper.updateByExampleSelective(cartitem,example);
+        if(a==1) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
 }

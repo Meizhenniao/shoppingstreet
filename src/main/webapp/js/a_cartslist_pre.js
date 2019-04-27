@@ -17,14 +17,13 @@ function dealwithCart() {
             jq("#cartitem_totalprice").hide();//购物车总计金额
             jq("#paytobuy").hide();//购买
             if (result.code == 1) {//如果获取到用户的购物车记录
-                var carts = result.extend.cartitems;//遍历session中存的数据
+                var carts = result.extend.cartitems;//遍历msg中存的数据
                 if (carts.length == 0) {//购物车个数为0
                     jq("#cartitem_lists").append("您的购物车暂时没有任何物品！")
                 } else {
                     var price_sum = 0;
                     jq.each(carts, function (index, item) {
                         price_sum += item.goodsamount * item.goods.price;
-                        alert(price_sum);
                         var cartImage = jq("          <div class=\"img\">\n" +
                             "                            <a href=\"javascript:void(0)\">\n" +
                             "                                <img src=\"/images/"  + item.goods.indexphotourl+"\" width=\"58\" height=\"58\">\n" +

@@ -218,11 +218,17 @@
             <version>3.1</version>
         </dependency>
 
-        <!--引入pageHelper分页插件 -->
+        <!--引入pageHelper分页插件 可帮助我在搜索出结果后分页-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
             <version>5.1.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13-beta-2</version>
         </dependency>
     </dependencies>
 
