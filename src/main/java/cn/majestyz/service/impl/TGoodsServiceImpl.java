@@ -24,9 +24,7 @@ public class TGoodsServiceImpl implements TGoodsService{
     }
 
     @Override
-    public TGoods queryGoodsItemById(int goodsitemid) {
-//        TGoodsExample example = new TGoodsExample();
-//        example.createCriteria().andIdEqualTo(goodsitemid);
-        return goodsMapper.selectByPrimaryKey(goodsitemid);
+    public TGoods queryGoodsById(int goodsid) {
+        return goodsMapper.selectByPrimaryKey(goodsid);
     }
 }

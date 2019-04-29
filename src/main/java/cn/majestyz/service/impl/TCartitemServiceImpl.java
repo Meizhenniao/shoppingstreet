@@ -38,9 +38,9 @@ public class TCartitemServiceImpl implements TCartitemService{
     }
 
     @Override
-    public TCartitem quertCartItem(int goodsitemid, int userid) {
+    public TCartitem queryCartItem(int goodsid, int userid) {
         TCartitemExample example = new TCartitemExample();
-        example.createCriteria().andGoodsidEqualTo(goodsitemid).andUseridEqualTo(userid);
+        example.createCriteria().andGoodsidEqualTo(goodsid).andUseridEqualTo(userid);
         List<TCartitem> cartitems = cartitemMapper.selectByExample(example);
         if(cartitems.size() == 0){
             System.out.println("这个商品在我的购物车里是没有的");
@@ -52,11 +52,25 @@ public class TCartitemServiceImpl implements TCartitemService{
     }
 
     @Override
-    public boolean newCartItem(int goodsitemid, int userid) {
+    public boolean newCartItem(int goodsid, int userid) {
         TCartitem cartitem = new TCartitem();
-        cartitem.setGoodsid(goodsitemid);
+        cartitem.setGoodsid(goodsid);
         cartitem.setUserid(userid);
         cartitem.setGoodsamount(1);
+        int a = cartitemMapper.insertSelective(cartitem);
+        if(a == 1) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean newCartItem2(int goodsid, int userid,int amount) {
+        TCartitem cartitem = new TCartitem();
+        cartitem.setGoodsid(goodsid);
+        cartitem.setUserid(userid);
+        cartitem.setGoodsamount(amount);
         int a = cartitemMapper.insertSelective(cartitem);
         if(a == 1) {
             return true;
@@ -80,6 +94,20 @@ public class TCartitemServiceImpl implements TCartitemService{
     }
 
     @Override
+    public boolean addGoodsAmount2(int goodsid,int userid,int goodsamount,int amount) {
+        TCartitem cartitem = new TCartitem();
+        cartitem.setGoodsamount(goodsamount+amount);
+        TCartitemExample example = new TCartitemExample();
+        example.createCriteria().andGoodsidEqualTo(goodsid).andUseridEqualTo(userid);
+        int a = cartitemMapper.updateByExampleSelective(cartitem,example);
+        if(a==1) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
     public boolean subGoodsAmount(int goodsid,int userid,int goodsamount) {
         TCartitem cartitem = new TCartitem();
         cartitem.setGoodsamount(goodsamount-1);
@@ -87,6 +115,32 @@ public class TCartitemServiceImpl implements TCartitemService{
         example.createCriteria().andGoodsidEqualTo(goodsid).andUseridEqualTo(userid);
         int a = cartitemMapper.updateByExampleSelective(cartitem,example);
         if(a==1) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delGoodsInCart(int goodsid, int userid) {
+        TCartitemExample example = new TCartitemExample();
+        example.createCriteria().andGoodsidEqualTo(goodsid).andUseridEqualTo(userid);
+        int a = cartitemMapper.deleteByExample(example);
+        if(a==1) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delAllCarts(int userid) {
+        TCartitemExample example = new TCartitemExample();
+        example.createCriteria().andUseridEqualTo(userid);
+        int a = cartitemMapper.deleteByExample(example);
+//        int a = cartitemMapper.deleteByPrimaryKey(userid);
+        System.out.println("删除后"+a);
+        if(a>0) {
             return true;
         }else {
             return false;

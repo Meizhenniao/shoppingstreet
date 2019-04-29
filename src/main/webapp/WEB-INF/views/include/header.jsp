@@ -6,7 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="js/a_cartslist_pre.js"></script><%--负责购物车的js--%>
+<script type="text/javascript" src="js/a_logout.js"></script><%--负责退出登录--%>
+<script type="text/javascript" src="js/n_nav.js"></script> <%--负责全部商品列表--%>
 <div class="soubg">
     <div class="sou">
         <!--Begin 所在收货地区 Begin-->
@@ -88,7 +91,7 @@
         <span class="fr">
             <span class="fl">你好，
 	            <c:if test="${sessionScope.user != null}">
-                    <a href="${pageContext.request.contextPath}/personalcenter">${sessionScope.user.username}</a>
+                    <a href="${pageContext.request.contextPath}/menber_center">${sessionScope.user.username}</a>
                     &nbsp;
                     <a href="${pageContext.request.contextPath}/logout" style="color:#ff4e00;">退出</a>
                     &nbsp;
@@ -97,9 +100,9 @@
                     &nbsp;|
                 </c:if>
                 <c:if test="${sessionScope.user == null}">
-                    <a href="/to_login">请登录</a>
+                    <a href="/login">请登录</a>
                     &nbsp;
-                    <a href="/to_regist" style="color:#ff4e00;">免费注册</a>
+                    <a href="/regist" style="color:#ff4e00;">免费注册</a>
                     &nbsp;
                 </c:if>
             </span>
@@ -149,13 +152,13 @@
 
     <%--start 购物车下拉列表 --%>
     <div class="i_car">
-        <div id="cartitem_amount" class="car_t">购物车 [ <span>0</span> ]</div>
+        <div id="cartitem_amount" onclick="toCartsBrowse()" class="car_t">购物车 [ <span>0</span> ]</div>
         <div class="car_bg">
             <%--首先判断是否已经登录--%>
             <%--start 未登录--%>
             <c:if test="${sessionScope.user==null}">
                 <div class="un_login">还未登录！
-                    <a href="${pageContext.request.contextPath}/to_login" style="color:#ff4e00;">马上登录</a>
+                    <a href="${pageContext.request.contextPath}/login" style="color:#ff4e00;">马上登录</a>
                 </div>
             </c:if>
             <%--end 未登录--%>
@@ -170,4 +173,20 @@
     </div>
     <%--end  购物车下拉列表--%>
 </div>
+<script type="text/javascript">
+
+    //mz  在goods_searchresult页面继续搜索
+    $("#start_search").click(function () {
+        //获取参数
+        if($("#keyword").val() == ""){
+            alert("搜索内容不能为空");
+            return false;//???return false是什么意思，重新返回这一页面吗
+        }
+        window.location.href = "${pageContext.request.contextPath}/goods_searchresult?keyword=" + $("#keyword").val();//???这是什么方式的传参啊   RequestParam的传参
+    })
+
+
+
+
+</script>
 

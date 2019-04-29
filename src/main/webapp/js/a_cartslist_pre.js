@@ -3,12 +3,12 @@
  */
 var jq = jQuery.noConflict();
 jq(function () {
-    dealwithCart();
+    showSmallCartList();
 });
 
-function dealwithCart() {
+function showSmallCartList() {
     jq.ajax({
-        url: "/cartlist_pre",
+        url: "/get_cartitems",
         type: "GET",
         success: function (result) {
             jq("#cartitem_amount").html("购物车 [ <span>0</span> ]");//购物车数量
@@ -52,14 +52,6 @@ function dealwithCart() {
     })
 }
 
-function logout() {
-    jq.ajax({
-        url: "/logout",
-        type: "POST",
-        success: function (result) {
-            if (result.code == 0) {
-                window.location.reload();
-            }
-        }
-    })
+function toCartsBrowse(){
+    window.location.href = "/carts_browse"
 }

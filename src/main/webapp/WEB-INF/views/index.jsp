@@ -40,7 +40,7 @@
     <!--End Header End-->
 
     <!--Begin Menu Begin-->
-    <%@ include file="/WEB-INF/views/include/menu.jsp" %>
+    <%@ include file="/WEB-INF/views/include/menu_nothide.jsp" %>
     <!--End Menu End-->
 
     <div class="i_bg bg_color">
@@ -860,14 +860,7 @@
 
 <script type="text/javascript">
 
-    $("#start_search").click(function () {
-        //获取参数
-        if($("#keyword").val() == ""){
-            alert("搜索内容不能为空");
-            return false;//???return false是什么意思，重新返回这一页面吗
-        }
-        window.location.href = "${pageContext.request.contextPath}/search?keyword=" + $("#keyword").val();//???这是什么方式的传参啊   RequestParam的传参
-    })
+
 </script>
 
 </html>

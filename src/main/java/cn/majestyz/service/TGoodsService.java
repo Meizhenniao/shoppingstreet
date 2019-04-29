@@ -11,5 +11,5 @@ public interface TGoodsService {
     //search for goods by user init_name
     List<TGoods> queryGoodsByNameLike(String name);
 
-    TGoods queryGoodsItemById(int goodsitemid);
+    TGoods queryGoodsById(int goodsid);
 }

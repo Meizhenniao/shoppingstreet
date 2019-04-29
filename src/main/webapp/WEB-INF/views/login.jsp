@@ -53,7 +53,7 @@
                                 <td width="55">&nbsp;</td>
                                 <td>
                                     <span class="fl" style="font-size:24px;">登录</span>
-                                    <span class="fr">还没有商城账号，<a href="/to_regist" style="color:#ff4e00;">立即注册</a></span>
+                                    <span class="fr">还没有商城账号，<a href="/regist" style="color:#ff4e00;">立即注册</a></span>
                                 </td>
                             </tr>
                             <tr height="70">
@@ -114,7 +114,7 @@
                 success:function (result) {
                     if(result.code == 1){
                         alert(result.msg);
-                        window.location.href = "${pageContext.request.contextPath}/to_index";//依然是用controller控制页面跳转不是直接到指定页面
+                        window.location.href = "${pageContext.request.contextPath}/index";//依然是用controller控制页面跳转不是直接到指定页面
                     }else{
                         alert("登录失败")
                     }

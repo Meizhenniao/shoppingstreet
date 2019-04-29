@@ -23,10 +23,9 @@ public class GoodsController {
     @Autowired
     TGoodsService goodsService;
     //负责和数据库交互
-    @RequestMapping(value = "/search_res",method = RequestMethod.POST)//???为什么是POST
+    @RequestMapping(value = "/query_goodslist_namelike",method = RequestMethod.POST)//???为什么是POST
     @ResponseBody//???什么情况下要用responseBody,返回的数据写到http请求中???所以我这个msg的内容也会写到http请求里吗
-    public Msg searchByName_like(@RequestParam(value = "keyword") String keyword, @RequestParam(value = "page", defaultValue = "1") int page){
-        System.out.println("会进searchByName_like");
+    public Msg getGoodsListByNameLike(@RequestParam(value = "keyword") String keyword, @RequestParam(value = "page", defaultValue = "1") int page){
         PageHelper.startPage(page, 12);//???
         List<TGoods> goods = goodsService.queryGoodsByNameLike(keyword);
         PageInfo<TGoods> pageInfo = new PageInfo<>(goods, 5);
@@ -37,29 +36,27 @@ public class GoodsController {
         }
     }
 
-    @RequestMapping(value = "/getgoodsitemdetail",method = RequestMethod.POST)
+    @RequestMapping(value = "/query_goods",method = RequestMethod.POST)
     @ResponseBody
-    public Msg searchGooodsItemByGoodsId(@RequestParam(value = "goodsitemid")int goodsitemid){
-        TGoods goodsitem = goodsService.queryGoodsItemById(goodsitemid);
-        if(goodsitem !=null){
-            System.out.println("goodsitemname="+goodsitem.getGoodsname());
-            return Msg.success().add("goodsitem",goodsitem);
+    public Msg getGooodsByGoodsId(@RequestParam(value = "goodsid")int goodsid){
+        TGoods goods = goodsService.queryGoodsById(goodsid);
+        if(goods !=null){
+            System.out.println("goodsname="+goods.getGoodsname());
+            return Msg.success().add("goods",goods);
         }else{
             return Msg.fail();
         }
     }
 
-    //2.只负责页面跳转
-    //跳转到搜索结果界面
-    @RequestMapping(value = "/search", method = RequestMethod.GET)//???和上面名字一样啊emmmmm???
+    //2.仅负责跳转
+    @RequestMapping(value = "/goods_searchresult", method = RequestMethod.GET)
     public String toSearch() {
-        System.out.println("会进tosearch");
-        return "searchresult";//???从哪里的语句控制调过来的啊啊啊啊
+        return "goods_searchresult";
     }
 
-    //跳转到商品详情页面,从searchresult页面传item过来还是传goodsid
-    @RequestMapping(value = "/goodsdetail",method = RequestMethod.GET)
+    //跳转到商品详情页面
+    @RequestMapping(value = "/goods_detail",method = RequestMethod.GET)
     public String toGoodsDetail(){
-        return "goodsdetail";
+        return "goods_detail";
     }
 }

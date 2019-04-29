@@ -25,7 +25,7 @@
     <script type="text/javascript" src="js/lrscroll_1.js"></script>
 
 
-    <script type="text/javascript" src="js/n_nav.js"></script>
+    <%--<script type="text/javascript" src="js/n_nav.js"></script>--%>
 
     <title>购物街</title>
 </head>
@@ -35,9 +35,9 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <!--End Header End-->
 
-<%--和index.jsp中相同--%>
-<%@ include file="/WEB-INF/views/include/menu.jsp" %>
-<!--End Menu End-->
+    <%--Start Menu Start--%>
+    <%@ include file="/WEB-INF/views/include/menu_hide.jsp" %>
+    <!--End Menu End-->
 
 <div class="i_bg">
 
@@ -181,7 +181,7 @@
 
     function search_res(keyword, page) {//keyword 和page
         $.ajax({
-            url: "${pageContext.request.contextPath}/search_res",
+            url: "${pageContext.request.contextPath}/query_goodslist_namelike",
             type: "POST",
             data: "keyword=" + keyword,
             success: function (result) {
@@ -197,11 +197,11 @@
         $("#goods").empty();
         var goods = result.extend.pageInfo.list;
         $.each(goods, function (index, item) {//???如何把item传到goodsdeatil.jsp中
-            var goodImage = $(" <div class=\"img\"><a href=\"goodsdetail?goodsitemid=" + item.id +
+            var goodImage = $(" <div class=\"img\"><a href=\"goods_detail?goodsid=" + item.id +
                 "\"><img src=\"images/" + item.indexphotourl +
                 "\" width=\"210\" height=\"185\" /></a></div>")
             var goodPrice = $("<div class=\"price\"><font color=\"#ff4e00\">￥" + item.price + "</font></div>")
-            var goodName = $("<div class=\"name\"><a href=\"goodsdetail?goodsitemid=" + item.id +
+            var goodName = $("<div class=\"name\"><a href=\"goods_detail?goodsid=" + item.id +
                 "\">" + item.goodsname + "</a></div>")
             var goodCart = $("<div class=\"carbg\">\n" +
                 "<a href=\"#\" class=\"ss\">收藏</a>\n" +
@@ -221,18 +221,7 @@
 
     }
 
-    //mz  在searchresult页面继续搜索
-    $("#start_search").click(function () {
-        //获取参数
-        var search_str = $("#keyword").val();
-        if (search_str == "") {
-            alert("搜索内容不能为空");
-            return false;//???return false是什么意思，重新返回这一页面吗
-        }
-        window.location.href = "${pageContext.request.contextPath}/search?keyword=" + search_str;//???继续用这个方法好像很笨，暂时这样吧
-
-    })
-
+    //判断是否已经登录，没有登录则提示没有登录
     function isLogin(id) {
         $.ajax({
             url: "${pageContext.request.contextPath}/islogin",
@@ -242,22 +231,23 @@
                     alert("已登录")
                     addToCart(id)
                 } else {
-                    alert("没登录")
+                    alert("没登录")//???这里应该要问用户要不要登录，登陆后还要返回这个页面
                 }
             }
         })
     }
+
     function addToCart(id) {
         alert("id=" + id);
         $.ajax({
-            url: "${pageContext.request.contextPath}/addToCart",
+            url: "${pageContext.request.contextPath}/add_cart",
             type: "POST",
-            dataType: "json",
-            data: "goodsitemid=" + id,
+            data: "goodsid=" + id,
             success: function (result) {
                 alert("msg=" + result.msg)//???这里要是出错了都不会提示吗，直接停止执行?
                 if (result.code == 1) {
                     alert("加入购物车成功")
+                    window.location.reload();
                 } else {
                     alert(result.msg);
                 }

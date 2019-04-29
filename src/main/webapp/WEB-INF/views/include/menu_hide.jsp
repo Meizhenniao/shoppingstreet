@@ -1,18 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: MeiZhen
-  Date: 2019/4/26
-  Time: 20:35
+  Date: 2019/4/28
+  Time: 15:02
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--全部商品分类左边的小菜单--%>
 <div class="menu_bg">
     <div class="menu">
         <!--Begin 商品分类详情 Begin-->
         <div class="nav">
             <div class="nav_t">全部商品分类</div>
-            <div class="leftNav">
+            <div class="leftNav none">
                 <ul>
                     <li>
                         <div class="fj">
@@ -255,7 +254,7 @@
         </div>
         <!--End 商品分类详情 End-->
         <ul class="menu_r">
-            <li><a href="index.jsp">首页</a></li>
+            <li><a href="Index.html">首页</a></li>
             <li><a href="Food.html">美食</a></li>
             <li><a href="Fresh.html">生鲜</a></li>
             <li><a href="HomeDecoration.html">家居</a></li>

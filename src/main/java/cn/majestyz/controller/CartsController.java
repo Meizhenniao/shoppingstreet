@@ -21,13 +21,14 @@ public class CartsController {
     @Autowired
     TCartitemService cartitemService;
 
-    //    1.需要操作cart表的controller start
-    //没有点击按钮，js中获取购物车信息
-    @RequestMapping(value = "/cartlist_pre", method = RequestMethod.GET)//为什么是GET???
+    // 1. 数据库交互
+    @RequestMapping(value = "/get_cartitems", method = RequestMethod.GET)//为什么是GET???
     @ResponseBody
-    public Msg getCartListPre(HttpSession session) {//???什么时候需要写@RequestParam
+    public Msg getCartitems(HttpSession session) {//???什么时候需要写@RequestParam
+        System.out.println("你在getCartitems方法中");
         TUser user = (TUser) session.getAttribute("user");
         if (user == null) {
+            System.out.println("还没有登录");
             return Msg.fail();
         } else {
             List<TCartitem> cartitems = cartitemService.getLimitedCartitemsByUserId(user.getId(), LIMIT);
@@ -35,15 +36,15 @@ public class CartsController {
         }
     }
 
-    @RequestMapping(value = "/addToCart", method = RequestMethod.POST)
+    @RequestMapping(value = "/add_cart", method = RequestMethod.POST)
     @ResponseBody
-    public Msg addGoodsToCart(int goodsitemid, HttpSession session) {
+    public Msg addGoodsToCart(int goodsid, HttpSession session) {
         System.out.println("controller addGoodsToCart");
         TUser user = (TUser) session.getAttribute("user");
         int userid = user.getId();
-        TCartitem cartitem = cartitemService.quertCartItem(goodsitemid,userid);
+        TCartitem cartitem = cartitemService.queryCartItem(goodsid,userid);
         if(cartitem==null){
-            if(cartitemService.newCartItem(goodsitemid,userid)){
+            if(cartitemService.newCartItem(goodsid,userid)){
                 return Msg.success();
             }else{
                 return Msg.fail();
@@ -51,7 +52,7 @@ public class CartsController {
         }else{
             int goodsamount =  cartitem.getGoodsamount();
             System.out.println("原来的数量为："+goodsamount);
-            if(cartitemService.addGoodsAmount(goodsitemid,userid,goodsamount)){
+            if(cartitemService.addGoodsAmount(goodsid,userid,goodsamount)){
                 return Msg.success();
             }else {
                 return Msg.fail();
@@ -59,17 +60,40 @@ public class CartsController {
         }
     }
 
-
-
-    @RequestMapping(value = "/subToCart", method = RequestMethod.POST)
+    @RequestMapping(value = "/add_cart_amount",method = RequestMethod.POST)
     @ResponseBody
-    public Msg subGoodsToCart(int goodsitemid, HttpSession session) {
-        System.out.println("controller addGoodsToCart");
+    public Msg addGoodsToCartAmount(int goodsid,HttpSession session,int amount){
+        System.out.println("goodsid="+goodsid+",amount="+amount);
         TUser user = (TUser) session.getAttribute("user");
         int userid = user.getId();
-        TCartitem cartitem = cartitemService.quertCartItem(goodsitemid,userid);
+        TCartitem cartitem = cartitemService.queryCartItem(goodsid,userid);
+        if(cartitem==null){
+            if(cartitemService.newCartItem2(goodsid,userid,amount)){
+                return Msg.success();
+            }else{
+                return Msg.fail();
+            }
+        }else{
+            int goodsamount =  cartitem.getGoodsamount();
+            System.out.println("原来的数量为："+goodsamount);
+            if(cartitemService.addGoodsAmount2(goodsid,userid,goodsamount,amount)){
+                return Msg.success();
+            }else {
+                return Msg.fail();
+            }
+        }
+    }
+
+    //一个一个减少
+    @RequestMapping(value = "/sub_cart", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg subGoodsToCart(int goodsid, HttpSession session) {
+        System.out.println("controller subGoodsToCart");
+        TUser user = (TUser) session.getAttribute("user");
+        int userid = user.getId();
+        TCartitem cartitem = cartitemService.queryCartItem(goodsid,userid);
         int goodsamount =  cartitem.getGoodsamount();
-        if(cartitemService.subGoodsAmount(goodsitemid,userid,goodsamount)){
+        if(cartitemService.subGoodsAmount(goodsid,userid,goodsamount)){
             return Msg.success();
         }else{
             return Msg.fail();
@@ -77,6 +101,33 @@ public class CartsController {
 
     }
 
+    @RequestMapping(value = "/del_cart",method = RequestMethod.POST)
+    @ResponseBody
+    public Msg delGoodsInCart(int goodsid,HttpSession session){
+        System.out.println("controller delGoodsInCart");
+        TUser user = (TUser) session.getAttribute("user");
+        int userid = user.getId();
+        if(cartitemService.delGoodsInCart(goodsid,userid)){
+            return Msg.success();
+        }else{
+            return Msg.fail();
+        }
+    }
+
+    @RequestMapping(value = "/del_allcarts",method = RequestMethod.POST)
+    @ResponseBody
+    public Msg delAllCarts(HttpSession session){
+        System.out.println("controller delAllCarts");
+        TUser user = (TUser) session.getAttribute("user");
+        int userid = user.getId();
+        if(cartitemService.delAllCarts(userid)){
+            return Msg.success();
+        }else{
+            return Msg.fail();
+        }
+    }
+
+    //2
     @RequestMapping(value = "/islogin", method = RequestMethod.GET)
     @ResponseBody
     public Msg islogin(HttpSession session) {
@@ -87,12 +138,17 @@ public class CartsController {
             return Msg.fail();
         }
     }
-    //mz 在搜索出的结果后，点击加入购物车按钮的操作
 
-//    1.需要操作cart表的controller end
+    //3 仅负责跳转
+    @RequestMapping(value = "/carts_browse",method = RequestMethod.GET)
+    public String toCartsBrowse(){
+        return "carts_browse";
+    }
 
-//    2.仅仅负责跳转的controller start
+    @RequestMapping(value = "/carts_oder_confirm",method = RequestMethod.GET)
+    public String toCartsOrderConfirm(){
+        return "carts_oder_confirm";
+    }
 
-//    2.仅仅负责跳转的controller end
 
 }

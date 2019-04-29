@@ -26,7 +26,7 @@
     <script type="text/javascript" src="js/menu.js"></script>
 
     <script type="text/javascript" src="js/lrscroll_1.js"></script>
-    <script type="text/javascript" src="js/n_nav.js"></script>
+    <%--<script type="text/javascript" src="js/n_nav.js"></script>--%>
 
     <link rel="stylesheet" type="text/css" href="css/ShopShow.css" />
     <link rel="stylesheet" type="text/css" href="css/MagicZoom.css" />
@@ -39,8 +39,7 @@
     <script type="text/javascript" src="js/p_tab.js"></script>
 
     <script type="text/javascript" src="js/shade.js"></script>
-    <%--关于商品详情的js  原先是ShopShow.js--%>
-    <script type="text/javascript" src="js/a_goodsimfo_detail.js"></script>
+
     <title>购物街</title>
 </head>
 
@@ -50,9 +49,8 @@
     <!--End Header End-->
 
     <!--Begin Menu Begin-->
-    <%@ include file="/WEB-INF/views/include/menu.jsp" %>
+    <%@ include file="/WEB-INF/views/include/menu_hide.jsp" %>
     <!--End Menu End-->
-
 
     <div class="i_bg">
 
@@ -89,7 +87,7 @@
                     </div>
                     <div id="tsImgSArrR" onclick="tsScrollArrRight()"></div>
                 </div>
-                <img class="MagicZoomLoading" width="16" height="16" src="images/loading.gif" alt="Loading..." />
+                <%--<img class="MagicZoomLoading" width="16" height="16" src="images/loading.gif" alt="Loading..." />--%>
             </div>
             <%--文字--%>
             <div class="pro_des" >
@@ -132,21 +130,28 @@
                 </div>
                 <%--监听按钮点击加入购物车--%>
                 <div class="des_join">
-                    <div class="j_nums">
-                        <input type="text" value="0" name="" class="n_ipt" />
-                        <%--<input type="button" value="" onclick="addUpdate(jq(this));" class="n_btn_1" />--%>
-                        <input type="button" value="" onclick="addUpdate(jq(this));" class="n_btn_1" />
-                        <input type="button" value="" onclick="jianUpdate(jq(this));" class="n_btn_2" />
-                    </div>
-                    <span class="fl">
-                        <c:if test="${sessionScope.user==null}">
-                            <img onclick="unloginAdd()" src="images/j_car.png" />
-                        </c:if>
-                        <c:if test="${sessionScope.user!=null}">
-                            <img onclick="loginedAdd()" src="images/j_car.png" />
-                        </c:if>
-                    </span>
-
+                    <c:if test="${sessionScope.user==null}">
+                        <div class="j_nums">
+                            <input type="text" value="0" name="" id="n_ipt" class="n_ipt"/>
+                            <input type="button" value="" onclick="notLogin();" class="n_btn_1" />
+                            <input type="button" value="" onclick="notLogin();" class="n_btn_2" />
+                        </div>
+                        <span class="fl">
+                            <img onclick="notLogin()" src="images/j_car.png" />
+                        </span>
+                    </c:if>
+                    <c:if test="${sessionScope.user!=null}">
+                        <div class="j_nums">
+                            <input type="text" value="1" name="" id="n_ipt" class="n_ipt"/>
+                            <c:if test="${sessionScope.user!=null}">
+                                <input type="button" value="" onclick="addUpdate(jq(this));" class="n_btn_1" />
+                                <input type="button" value="" onclick="jianUpdate(jq(this));" class="n_btn_2" />
+                            </c:if>
+                        </div>
+                        <span class="fl">
+                            <img onclick="addToCart(jq(this))" src="images/j_car.png" />
+                        </span>
+                    </c:if>
                 </div>
             </div>
 
@@ -461,69 +466,59 @@
 
 </body>
 
+<%--关于商品详情的js  原先是ShopShow.js--%>
+<script type="text/javascript" src="js/a_goodsimfo_detail.js"></script>
 <script type="text/javascript">
+
     $(function () {
-        showGoodsDetail(queryString("goodsitemid"))
+        showGoodsDetail(queryString("goodsid"))
     })
+
     function queryString(key) {//解出keyword的值
         key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
         var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
         return match && decodeURIComponent(match[1].replace(/\+/g, " "));
     }
+
     function showGoodsDetail(keyword) {//keyword 和page
         $.ajax({//???什么情况下要用ajax
-            url: "${pageContext.request.contextPath}/getgoodsitemdetail",
+            url: "${pageContext.request.contextPath}/query_goods",
             type: "POST",
-            data: "goodsitemid=" + keyword,//这个传参方式在controller用@RequestParam接收
+            data: "goodsid=" + keyword,//这个传参方式在controller用@RequestParam接收
             success: function (result) {
                 if (result.code == 1) {//如果获取到商品信息
-                    var goodsitem = result.extend.goodsitem;//遍历  msg 中存的数据
+                    var goods = result.extend.goods;//遍历  msg 中存的数据
 //                    var goodsotherimg = result.extend.otherimg;
-                    var goodsItemIndexPhoto = $("<a title=\"Images\" class=\"MagicZoom\"><img src=\"images/"  + goodsitem.indexphotourl+"\" width=\"390\" height=\"390\"></a>")
+                    var goodsIndexPhoto = $("<a title=\"Images\" class=\"MagicZoom\"><img src=\"images/"  + goods.indexphotourl+"\" width=\"390\" height=\"390\"></a>")
 
-                    var goodsItemName = $("<p href=\"javascript:void(0)\">" + goodsitem.goodsname + "</p>")
+                    var goodsName = $("<p href=\"javascript:void(0)\">" + goods.goodsname + "</p>")
 
-                    var goodsItemPrice = $("<p>商品价格：<b color=\"#ff4e00\">￥" + goodsitem.price + "</b><br />消费积分：<span>28R</span><p>")
+                    var goodsPrice = $("<p>商品价格：<b color=\"#ff4e00\">￥" + goods.price + "</b><br />消费积分：<span>28R</span><p>")
 
-                    $("<a></a>").append(goodsItemIndexPhoto).appendTo("#tsImgS")
+                    $("<a></a>").append(goodsIndexPhoto).appendTo("#tsImgS")
 
 //                   循环
                     // $("<li></li>").append().appendTo("#dtMorePhoto")
 
-                    alert("图片"+goodsitem.indexphotourl)
-                    $("<p></p>").append(goodsItemName).appendTo("#dtGoodsName")
+                    alert("图片"+goods.indexphotourl)
+                    $("<p></p>").append(goodsName).appendTo("#dtGoodsName")
 
-                    $("<p></p>").append(goodsItemPrice).appendTo("#dtGoodsPrice")
+                    $("<p></p>").append(goodsPrice).appendTo("#dtGoodsPrice")
 
                 }
             }
         })
     }
 
-    function unloginAdd() {
-        var yesorno = confirm("您还没有登录是否登录后加入购物车");
+    //没有登录的情况下
+    function notLogin(){
+        var yesorno = confirm("还没登录是否登录");
         if(yesorno == true){
-            window.location.href = "${pageContext.request.contextPath}/to_login";
+            window.location.href = "${pageContext.request.contextPath}/login";//???要怎么才可以登陆后重新回到这个页面呢
         }else{
-            //存在session里面暂时先不做
+            window.location.reload();
         }
     }
 
-    function loginedAdd() {
-        $.ajax({
-            url: "${pageContext.request.contextPath}/addToCart",
-            type: "POST",
-            dataType:"json",
-            data:"goodsitemid="+ queryString("goodsitemid"),
-            success: function (result) {
-                alert("msg="+result.msg)//???这里要是出错了都不会提示吗，直接停止执行?
-                if(result.code == 1){
-                    ShowDiv_1('MyDiv1','fade1')
-                }else{
-                    alert(result.msg);
-                }
-            }
-        })
-    }
 </script>
 </html>
