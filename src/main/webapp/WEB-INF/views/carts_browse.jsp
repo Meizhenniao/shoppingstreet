@@ -221,9 +221,10 @@
                             var delOrBuy=$("" +
                                 "<td class=\"car_th\" width=\"150\" align=\"center\">" +
                                 "   <a href=\"#\" onclick=\"delToCart(" + item.goodsid +
-                                ")\">删除</a>&nbsp; &nbsp;<a href=\"#\">购买</a>" +
+                                ")\">删除</a>&nbsp; &nbsp;<a href=\"/carts_order_confirm?goodsid=" + item.goodsid +
+                                "\">购买</a>" +
                                 "</td>")
-
+//???在jq里面的jq里面不用再加$  {pageContext.request.contextPath}
                             $("<tr></tr>").append(imageAndName)
                                 .append(color)
                                 .append(addAndSub)
@@ -255,7 +256,41 @@
         })
 
     }
+    <%--function toCartsConfirm(object) {--%>
+        <%--$.ajax({--%>
+            <%--url:"${pageContext.request.contextPath}/carts_order_confirm?item=",--%>
+            <%--type:"POST",--%>
+            <%--contentType: "application/json;charset=utf8",--%>
+            <%--dataType: 'json',--%>
+            <%--data:JSON.stringify({--%>
+                <%--username : in_username,--%>
+                <%--password : in_password,--%>
+                <%--email : in_email,--%>
+                <%--tel : in_tel--%>
+            <%--}),--%>
+            <%--success:function () {--%>
 
+            <%--}--%>
+        <%--})--%>
+
+    <%--}--%>
+    <%--function intoOrder(goodsid){--%>
+        <%--var yesorno = confirm("是否确定结算这项购物车商品");--%>
+        <%--if(yesorno){--%>
+            <%--//得到cartitem （userid和goodsid确定的cartitem），传到carts_order_confirm页面显示出来，在确认以后，根据cartitems 和goodsid新建订单，并把这项商品新建订单成功后删除该项商品的购物车记录。--%>
+            <%--&lt;%&ndash;$.ajax({&ndash;%&gt;--%>
+                <%--&lt;%&ndash;url:"${pageContext.request.contextPath}/add_order",&ndash;%&gt;--%>
+                <%--&lt;%&ndash;type: "POST",&ndash;%&gt;--%>
+                <%--&lt;%&ndash;data:"goodsid="+goodsid,&ndash;%&gt;--%>
+                <%--&lt;%&ndash;success:function (result) {&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;if(result.code == 1){&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;alert("")&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;}&ndash;%&gt;--%>
+                <%--&lt;%&ndash;}&ndash;%&gt;--%>
+            <%--&lt;%&ndash;})&ndash;%&gt;--%>
+            <%--delToCart(goodsid)--%>
+        <%--}--%>
+    <%--}--%>
 
 </script>
 

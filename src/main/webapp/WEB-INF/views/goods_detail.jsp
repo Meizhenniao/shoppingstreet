@@ -143,13 +143,11 @@
                     <c:if test="${sessionScope.user!=null}">
                         <div class="j_nums">
                             <input type="text" value="1" name="" id="n_ipt" class="n_ipt"/>
-                            <c:if test="${sessionScope.user!=null}">
                                 <input type="button" value="" onclick="addUpdate(jq(this));" class="n_btn_1" />
                                 <input type="button" value="" onclick="jianUpdate(jq(this));" class="n_btn_2" />
-                            </c:if>
                         </div>
                         <span class="fl">
-                            <img onclick="addToCart(jq(this))" src="images/j_car.png" />
+                            <img onclick="addToCartD(jq(this))" src="images/j_car.png" />
                         </span>
                     </c:if>
                 </div>

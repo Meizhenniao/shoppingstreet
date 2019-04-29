@@ -22,6 +22,9 @@
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>
 
+    <%--没有这一行$(function)就执行不了，这个是jquery的库--%>
+    <script type="text/javascript" src="js/jquery-1.11.1.min_044d0927.js"></script>
+
     <%--<script type="text/javascript" src="js/n_nav.js"></script>--%>
 
     <script type="text/javascript" src="js/select.js"></script>
@@ -389,7 +392,91 @@
 
 </body>
 
-<!--[if IE 6]>
-<script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
-<![endif]-->
+
+<script type="text/javascript">
+    <%--$(function () {--%>
+        <%--showCartOrderConfirmList(queryString("goodsid"));--%>
+    <%--})--%>
+
+    <%--function queryString(key) {//解出keyword的值--%>
+        <%--key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars--%>
+        <%--var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));--%>
+        <%--return match && decodeURIComponent(match[1].replace(/\+/g, " "));--%>
+    <%--}--%>
+    <%--function showCartOrderConfirmList(goodsid) {--%>
+        <%--$.ajax({--%>
+            <%--url: "${pageContext.request.contextPath}/query_cartitems_goodsid",--%>
+            <%--type: "GET",--%>
+            <%--data:"goodsid="+goodsid,--%>
+            <%--success: function (result) {--%>
+                <%--if(result.code == 1){--%>
+                    <%--var carts = result.extend.cartitems;//遍历msg中存的数据--%>
+                    <%--if (carts.length == 0) {//购物车个数为0--%>
+                        <%--alert("???")--%>
+                    <%--} else {--%>
+                        <%--var price_sum = 0;--%>
+                        <%--$.each(carts, function (index, item) {--%>
+                            <%--price_sum += item.goodsamount * item.goods.price;--%>
+<%--//                            alert("开始遍历")--%>
+                            <%--var imageAndName = $("" +--%>
+                                <%--"<td  class=\"car_th\" width=\"490\"align=\"center\"> " +--%>
+                                <%--"   <div class=\"c_s_img\"><img src=\"/images/"+item.goods.indexphotourl+"\" width=\"73\" height=\"73\" /></div>" +item.goods.goodsname+--%>
+                                <%--"</td> " )--%>
+
+                            <%--var color=$("<td class=\"car_th\" width=\"140\" align=\"center\">颜色：灰色</td> ")--%>
+                            <%--var addAndSub=$("" +--%>
+                                <%--"<td class=\"car_th\" width=\"150\"align=\"center\"> " +--%>
+                                <%--"   <div class=\"c_num\">" +--%>
+                                <%--"       <input type=\"button\" onclick=\"subToCart(jq(this)," +item.goodsid +--%>
+                                <%--");\" class=\"car_btn_1\" />" +--%>
+                                <%--"       <input type=\"text\" value=\"" + item.goodsamount +"\" class=\"car_ipt\" /> " +--%>
+                                <%--"       <input type=\"button\"  onclick=\"addToCart(jq(this)," + +item.goodsid +--%>
+                                <%--");\" class=\"car_btn_2\" />" +--%>
+                                <%--"   </div> " +--%>
+                                <%--"</td> ")--%>
+<%--//                            var price= $("￥" + item.goods.price)--%>
+                            <%--var price= $("" +--%>
+                                <%--"<td  class=\"car_th\" width=\"130\" align=\"center\" style=\"color:#ff4e00;\">￥" + item.goods.price + "</td> ")--%>
+<%--//                            var jifen=$("26R")--%>
+                            <%--var jifen=$("<td class=\"car_th\" width=\"140\" align=\"center\">26R</td> ")--%>
+<%--//                            var delOrBuy=$("<a href=\"#\">删除</a>&nbsp; &nbsp;<a href=\"#\">购买</a>")--%>
+                            <%--var delOrBuy=$("" +--%>
+                                <%--"<td class=\"car_th\" width=\"150\" align=\"center\">" +--%>
+                                <%--"   <a href=\"#\" onclick=\"delToCart(" + item.goodsid +--%>
+                                <%--")\">删除</a>&nbsp; &nbsp;<a href=\"/carts_order_confirm?goodsid=" + item.goodsid +--%>
+                                <%--"\">购买</a>" +--%>
+                                <%--"</td>")--%>
+<%--//???在jq里面的jq里面不用再加$  {pageContext.request.contextPath}--%>
+                            <%--$("<tr></tr>").append(imageAndName)--%>
+                                <%--.append(color)--%>
+                                <%--.append(addAndSub)--%>
+                                <%--.append(price)--%>
+                                <%--.append(jifen)--%>
+                                <%--.append(delOrBuy)--%>
+                                <%--.appendTo("#cartitem_lists2")--%>
+                        <%--})--%>
+                        <%--var total = $("" +--%>
+                            <%--"<td colspan=\"6\" style=\"font-family:'Microsoft YaHei'; border-bottom:0;\"> " +--%>
+                            <%--"   <label onclick=\"delAllCarts()\" class=\"r_txt\">清空购物车</label> " +--%>
+                            <%--"   <span class=\"fr\">商品总价：<b style=\"font-size:22px; color:#ff4e00;\">￥"+price_sum+"</b></span>" +--%>
+                            <%--"   <div id=\"cartitem_totalprice2\" class=\"price_sum\"> </div> " +--%>
+                            <%--"</td>")--%>
+                        <%--$("<tr></tr>").append(total)--%>
+                            <%--.appendTo("#cartitem_lists2")--%>
+                        <%--var buytotal = $("" +--%>
+                            <%--"<td colspan=\"6\" align=\"right\">" +--%>
+                            <%--"   <a href=\"#\"><img src=\"images/buy1.gif\" /></a>&nbsp; &nbsp; " +--%>
+                            <%--"   <a href=\"#\"><img src=\"images/buy2.gif\" /></a> " +--%>
+                            <%--"</td>")--%>
+                        <%--$("<tr></tr>").append(buytotal)--%>
+                            <%--.appendTo("#cartitem_lists2")--%>
+                    <%--}--%>
+                <%--}else{--%>
+
+                <%--}--%>
+            <%--}--%>
+        <%--})--%>
+
+    <%--}--%>
+</script>
 </html>

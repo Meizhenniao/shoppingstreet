@@ -205,7 +205,7 @@
                     </ul>
                     <div id="cartitem_totalprice" class="price_sum">共计&nbsp; <font color="#ff4e00">￥</font><span>0</span>
                     </div>
-                    <div id="paytobuy" class="price_a"><a href="${pageContext.request.contextPath}/paytobuy">去购物车结算</a></div>
+                    <div id="paytobuy" class="price_a"><a href="${pageContext.request.contextPath}/carts_browse">去购物车结算</a></div>
                 </div>
             </div>
             <%--end  购物车下拉列表--%>

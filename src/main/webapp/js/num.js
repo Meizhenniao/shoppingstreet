@@ -36,14 +36,40 @@ function jianUpdate1(jian){
     }
 }
 
-//提示是否删除此商品购物车  购物车大列表页面
-function confirmToDelete(){
-    var yesorno = confirm("是否确定删除");
-    return yesorno;
+
+//删除1 jsp页面中的因为数量为1还要减少而删除、因为按右边的删除键而删除
+// 购物车大列表页面
+function delToCart(goodsid){
+    // alert("进入了删除的方法 goodsid="+goodsid)
+    var yesorno = confirm("是否确定删除这个购物车商品项目");
+    if(yesorno){
+        dodelToCart(goodsid);
+    }
 }
 
-//增加数量，根据框里的数增加，商品详情页面
-function addToCart(add) {
+// 删除2  清空购物车 属于userid的购物车就删除
+// 购物车大列表页面
+function delAllCarts(){
+    var yesorno = confirm("是否确定清空购物车");
+    if(yesorno) {
+        jq.ajax({
+            url:"/del_allcarts",
+            type: "POST",
+            success: function (result) {//这里是指在整个过程没有出现什么异常的情况和数据库操作的结果成功还是失败没有关系
+                if(result.code == 1){
+                    window.location.reload();
+                    alert("删除成功");
+                }else{
+                    alert(result.msg);
+                }
+            }
+        })
+    }
+}
+
+// 增加数量1 根据框里的数增加，
+// 商品详情页面
+function addToCartD(add) {
     var a = add.parent().parent().find(".n_ipt").val();
     var goodsid = queryString("goodsid");
     alert("a:"+parseInt(a)+",goodsid="+goodsid);//???能不能找到，能
@@ -63,7 +89,27 @@ function addToCart(add) {
     })
 }
 
-//减少数量 一个一个 到1还减少则删除，购物车大列表页面
+//增加数量2   一个一个
+// 购物车大列表页面
+function addToCart(jia,goodsid){
+    jq.ajax({
+        url: "/add_cart",
+        type: "POST",
+        data: "goodsid=" + goodsid,
+        success: function (result) {
+            if (result.code == 1) {
+                addUpdate1(jia);
+                alert("加入购物车成功")
+                window.location.reload();
+            } else {
+                alert(result.msg);
+            }
+        }
+    })
+}
+
+//减少数量1 一个一个 到1还减少则删除
+// 购物车大列表页面
 function subToCart(jian,goodsid){
     var a = jian.parent().parent().find(".car_ipt").val();
     // alert("减少  a="+a)//可以进来
@@ -84,8 +130,9 @@ function subToCart(jian,goodsid){
             }
         })
     }else if(a==1){
-        // alert("a==1");
-        if(confirmToDelete()){
+        alert("a==1");
+        var yesorno = confirm("是否确定清空购物车");
+        if(yesorno) {
             alert("我准备要删除了")
             delToCart(goodsid);
             window.location.reload();//删除后
@@ -93,58 +140,19 @@ function subToCart(jian,goodsid){
     }
 }
 
-//增加数量  一个一个 购物车大列表
-function addToCart(jia,goodsid){
+//删除操作 配合删除1 和 删除3
+function dodelToCart(goodsid){
     jq.ajax({
-        url: "/add_cart",
+        url: "/del_cart",//???能不能进入，能
         type: "POST",
-        data: "goodsid=" + goodsid,
-        success: function (result) {
-            if (result.code == 1) {
-                addUpdate1(jia);
-                alert("加入购物车成功")
+        data:"goodsid="+goodsid,
+        success: function (result) {//这里是指在整个过程没有出现什么异常的情况和数据库操作的结果成功还是失败没有关系
+            if(result.code == 1){
                 window.location.reload();
-            } else {
+                alert("删除成功");
+            }else{
                 alert(result.msg);
             }
         }
     })
-}
-
-//删除  一个商品的购物车信息,不区分购物车原来由多少个  购物车大列表页面
-function delToCart(goodsid){
-    // alert("进入了删除的方法 goodsid="+goodsid)
-    if(confirmToDelete()){
-        jq.ajax({
-            url: "/del_cart",//???能不能进入，能
-            type: "POST",
-            data:"goodsid="+goodsid,
-            success: function (result) {//这里是指在整个过程没有出现什么异常的情况和数据库操作的结果成功还是失败没有关系
-                if(result.code == 1){
-                    window.location.reload();
-                    alert("删除成功");
-                }else{
-                    alert(result.msg);
-                }
-            }
-        })
-    }
-}
-
-//删除  清空购物车  购物车大列表页面
-function delAllCarts(){
-    if(confirmToDelete()) {
-        jq.ajax({
-            url:"/del_allcarts",
-            type: "POST",
-            success: function (result) {//这里是指在整个过程没有出现什么异常的情况和数据库操作的结果成功还是失败没有关系
-                if(result.code == 1){
-                    window.location.reload();
-                    alert("删除成功");
-                }else{
-                    alert(result.msg);
-                }
-            }
-        })
-    }
 }

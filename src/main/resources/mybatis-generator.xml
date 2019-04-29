@@ -41,5 +41,6 @@
         <!--<table tableName="t_user" />-->
         <!--<table tableName="t_cartitem" />-->
         <!--<table tableName="t_goods" />-->
+        <!--<table tableName="t_order" />-->
     </context>
 </generatorConfiguration>
