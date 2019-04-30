@@ -3,6 +3,7 @@ package cn.majestyz.controller;
 import cn.majestyz.entity.Msg;
 import cn.majestyz.entity.TCartitem;
 import cn.majestyz.entity.TUser;
+import cn.majestyz.service.TCartitemService;
 import cn.majestyz.service.TOrderService;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +27,22 @@ public class OrderController {
 
     @Autowired
     TOrderService orderService;
+    @Autowired
+    TCartitemService cartitemService;
 
     // 1.数据库交互
-    @RequestMapping(value = "/add_order",method = RequestMethod.POST)
+    @RequestMapping(value = "/add_order_del",method = RequestMethod.POST)
     @ResponseBody
-    public Msg addOrder(@RequestBody TCartitem cartitem, HttpSession session){
+    public Msg addOrder(@RequestBody TCartitem cartitem){
         System.out.println("controller addOrder");
-        TUser user = (TUser) session.getAttribute("user");
-        int a = orderService.addOrder(getExpressNumber(),cartitem.getGoodsid(),user.getId(),cartitem.getGoodsamount(),"申通快递","支付宝");
+        int a = orderService.addOrder(getExpressNumber(),cartitem.getGoodsid(),cartitem.getUserid(),cartitem.getGoodsamount(),"申通快递","支付宝",cartitem.getGoods().getPrice()*cartitem.getGoodsamount());
         if(a == 1){
             System.out.println("a ====== 1");
-            return Msg.success();
+            if(cartitemService.delGoodsInCart(cartitem.getGoodsid(),cartitem.getUserid())){
+                return Msg.success();
+            }else{
+                return Msg.fail();
+            }
         }else{
             System.out.println("shibai ");
             return Msg.fail();

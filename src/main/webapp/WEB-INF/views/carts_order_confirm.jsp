@@ -159,7 +159,7 @@
     }
 
     function showCartOrderConfirmList(goodsid) {
-        alert("goodsid="+goodsid);
+//        alert("goodsid="+goodsid);
         if(goodsid == 0){
             showCartOrderConfirmListAll();
         }else{
@@ -200,7 +200,8 @@
 
                         var sumToPaysum = $("<td align=\"right\"> <b style=\"font-size:14px;\">应付款金额：<span style=\"font-size:22px; color:#ff4e00;\">￥" + price_sum+"</span></b></td>");
 
-                        var sumToPayphoto = $(" <td align=\"right\"><a href=\"#\"><img onclick=\"confirmToOrderOneByOne(" + carts+")\" src=\"images/btn_sure.gif\" /></a></td>");
+
+                        var sumToPayphoto = $(" <td align=\"right\"><a href=\"#\"><img onclick='confirmToOrderOneByOne(" + JSON.stringify(carts)+")' src=\"images/btn_sure.gif\" /></a></td>");
 
                         $("<tr></tr>").append(sumToPaysum)
                             .appendTo("#sumToPay")
@@ -221,7 +222,7 @@
             data:"goodsid="+goodsid,
             success: function (result) {
                 if(result.code == 1){
-                    alert("result.code=1");
+//                    alert("result.code=1");
                     var cartitem = result.extend.cartitem;//遍历msg中存的数据
                     if (cartitem == null) {//没有
                         alert("没有了")
@@ -250,8 +251,9 @@
 
                         var sumToPaysum = $("<td align=\"right\"> <b style=\"font-size:14px;\">应付款金额：<span style=\"font-size:22px; color:#ff4e00;\">￥" + cartitem.goodsamount*cartitem.goods.price+"</span></b></td>");
 
-                        var sumToPayphoto = $(" <td align=\"right\"><img onclick=\"confirmToOrder(" +cartitem+
-                            ")\" src=\"images/btn_sure.gif\" /></td>");
+                        var cart = JSON.stringify(cartitem);
+                        var sumToPayphoto = $(" <td align=\"right\"><img onclick='confirmToOrder(" +cart+
+                            ")' src=\"images/btn_sure.gif\" /></td>");
                         $("<tr></tr>").append(sumToPaysum)
                             .appendTo("#sumToPay");
                         $("<tr></tr>").append(sumToPayphoto)
@@ -265,15 +267,15 @@
     }
 
     function showUserImformation(){
-        alert("yes,showUserImformation");
+//        alert("yes,showUserImformation");
         $.ajax({
             url:"${pageContext.request.contextPath}/get_userimformation",
             type:"GET",
             success:function (result) {
                 if(result.code == 1){
-                    alert("code =1");
+//                    alert("code =1");
                     var user = result.extend.user;
-                    alert("showUserImformation userid="+user.id);
+//                    alert("showUserImformation userid="+user.id);
                     var first = ""+
                         "<td class=\"p_td\" width=\"160\" align=\"left\">用户名</td> <td width=\"395\">"+user.username+"</td> " +
                         "<td class=\"p_td\" width=\"160\" align=\"left\">电子邮件</td> <td width=\"395\">"+user.email+"</td>";
@@ -290,21 +292,24 @@
     }
 
     function confirmToOrderOneByOne(carts) {
-//        $.each(carts, function (index, item) {
-//            confirmToOrder(item)
-//        }
+        $.each(carts, function (index, item) {
+            confirmToOrder(item);
+        })
     }
 
     function confirmToOrder(cartitem) {
         alert("you are going to confirmOrder create an order");
         $.ajax({
-            url:"${pageContext.request.contextPath}/add_order",
+            url:"${pageContext.request.contextPath}/add_order_del",
             type:"POST",
             dataType:"json",
-            data:{
+            contentType: "application/json;charset=utf8",
+            data:JSON.stringify({
+                userid:cartitem.userid,
                 goodsid:cartitem.goodsid,
                 goodsamount:cartitem.goodsamount,
-            },
+                goods:cartitem.goods
+            }),
             success:function (result) {
                 if(result.code == 1){
                     alert("result.code = "+result.code);

@@ -16,7 +16,7 @@ public class TOrderServiceImpl implements TOrderService{
     TOrderMapper orderMapper;
 
     @Override
-    public int addOrder(String ordernumber, int goodsid, int userid, int goodsamount, String expresscompany, String paymentpattern) {
+    public int addOrder(String ordernumber, int goodsid, int userid, int goodsamount, String expresscompany, String paymentpattern,int sumprice) {
         TOrder order = new TOrder();
         order.setOrdernumber(ordernumber);
         order.setGoodsid(goodsid);
@@ -24,6 +24,7 @@ public class TOrderServiceImpl implements TOrderService{
         order.setGoodsamount(goodsamount);
         order.setExpresscompany(expresscompany);
         order.setPaymentpattern(paymentpattern);
+        order.setSumprice(sumprice);
         int a =orderMapper.insertSelective(order);
         System.out.println("a = "+ a);
         return a;
