@@ -22,10 +22,11 @@ public class CartsController {
     TCartitemService cartitemService;
 
     // 1. 数据库交互
-    @RequestMapping(value = "/query_cartitems", method = RequestMethod.GET)//为什么是GET???
+    //???这里的限制可以去掉
+    @RequestMapping(value = "/query_cartitems_limit", method = RequestMethod.GET)//为什么是GET???
     @ResponseBody
-    public Msg getCartitems(HttpSession session) {//???什么时候需要写@RequestParam
-        System.out.println("你在getCartitems方法中");
+    public Msg getCartitemsLimit(HttpSession session) {//???什么时候需要写@RequestParam
+        System.out.println("getCartitemsLimit");
         TUser user = (TUser) session.getAttribute("user");
         if (user == null) {
             System.out.println("还没有登录");
@@ -34,6 +35,32 @@ public class CartsController {
             List<TCartitem> cartitems = cartitemService.getLimitedCartitemsByUserId(user.getId(), LIMIT);
             return Msg.success().add("cartitems", cartitems);
         }
+    }
+
+    @RequestMapping(value = "/query_cartitems", method = RequestMethod.GET)//为什么是GET???
+    @ResponseBody
+    public Msg getCartitems(HttpSession session) {//???什么时候需要写@RequestParam
+        System.out.println("controller getCartitems");
+        TUser user = (TUser) session.getAttribute("user");
+        if (user == null) {
+            System.out.println("还没有登录");
+            return Msg.fail();
+        } else {
+            System.out.println("登录了");
+            List<TCartitem> cartitems = cartitemService.getCartitemsByUserId(user.getId());
+            System.out.println("list的长度是"+cartitems.size());
+            return Msg.success().add("cartitems", cartitems);
+        }
+    }
+
+    //只有登录了的才能用到这个方法
+    @RequestMapping(value = "/query_cartitem_goodsid", method = RequestMethod.GET)//为什么是GET???
+    @ResponseBody
+    public Msg getCartitemGoodsid(HttpSession session,int goodsid) {//???什么时候需要写@RequestParam
+        System.out.println("conotroller getCartitemGoodsid");
+        TUser user = (TUser) session.getAttribute("user");
+        TCartitem cartitem = cartitemService.getCartitemByGoodsidAndUserid(user.getId(),goodsid);
+        return Msg.success().add("cartitem", cartitem);
     }
 
     @RequestMapping(value = "/add_cart", method = RequestMethod.POST)
@@ -145,12 +172,6 @@ public class CartsController {
     @RequestMapping(value = "/carts_browse",method = RequestMethod.GET)
     public String toCartsBrowse(){
         return "carts_browse";
-    }
-
-
-    @RequestMapping(value = "/carts_oder_confirm",method = RequestMethod.GET)
-    public String toCartsOrderConfirm(){
-        return "carts_oder_confirm";
     }
 
 

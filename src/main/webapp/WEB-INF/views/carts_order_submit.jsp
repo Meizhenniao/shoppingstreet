@@ -20,6 +20,8 @@
     <![endif]-->
 
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.1.min_044d0927.js"></script>
+
     <script type="text/javascript" src="js/menu.js"></script>
 
     <%--<script type="text/javascript" src="js/n_nav.js"></script>--%>

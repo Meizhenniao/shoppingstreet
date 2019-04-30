@@ -12,6 +12,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link type="text/css" rel="stylesheet" href="css/style.css" />
+
     <!--[if IE 6]>
     <script src="js/iepng.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -20,6 +21,8 @@
     <![endif]-->
 
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    <%--没有这一行$(function)就执行不了，这个是jquery的库--%>
+    <script type="text/javascript" src="js/jquery-1.11.1.min_044d0927.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>
 
     <%--<script type="text/javascript" src="js/n_nav.js"></script>--%>
@@ -29,8 +32,6 @@
     </script>
 
     <script type="text/javascript" src="js/shade.js"></script>
-    <%--没有这一行$(function)就执行不了，这个是jquery的库--%>
-    <script type="text/javascript" src="js/jquery-1.11.1.min_044d0927.js"></script>
 
     <title>购物街</title>
 </head>
@@ -197,7 +198,7 @@
                             price_sum += item.goodsamount * item.goods.price;
 //                            alert("开始遍历")
                             var imageAndName = $("" +
-                                "<td  class=\"car_th\" width=\"490\"align=\"center\"> " +
+                                "<td  class=\"car_th\" width=\"490\" align=\"center\"> " +
                                 "   <div class=\"c_s_img\"><img src=\"/images/"+item.goods.indexphotourl+"\" width=\"73\" height=\"73\" /></div>" +item.goods.goodsname+
                                 "</td> " )
 
@@ -218,8 +219,8 @@
                             var delOrBuy=$("" +
                                 "<td class=\"car_th\" width=\"150\" align=\"center\">" +
                                 "   <a href=\"#\" onclick=\"delToCart(" + item.goodsid +
-                                ")\">删除</a>&nbsp; &nbsp;<a href=\"/carts_order_confirm?goodsid=" + item.goodsid +
-                                "\">购买</a>" +
+                                ")\">删除</a>&nbsp; &nbsp;<a onclick=\"toCartsConfirm(" + item.goodsid +
+                                ")\">购买</a>" +
                                 "</td>")
 //???在jq里面的jq里面不用再加$  {pageContext.request.contextPath}
                             $("<tr></tr>").append(imageAndName)
@@ -240,8 +241,8 @@
                             .appendTo("#cartitem_lists2")
                         var buytotal = $("" +
                             "<td colspan=\"6\" align=\"right\">" +
-                            "   <a href=\"#\"><img src=\"images/buy1.gif\" /></a>&nbsp; &nbsp; " +
-                            "   <a href=\"#\"><img src=\"images/buy2.gif\" /></a> " +
+                            "   <img src=\"images/buy1.gif\" />&nbsp; &nbsp; " +
+                            "   <img src=\"images/buy2.gif\" onclick=\"toCartsConfirmAll()\"/> " +
                             "</td>")
                         $("<tr></tr>").append(buytotal)
                             .appendTo("#cartitem_lists2")
@@ -252,6 +253,15 @@
             }
         })
 
+    }
+
+    function toCartsConfirm(goodsid){
+        alert("去carts_order_confirm");
+        window.location.href="${pageContext.request.contextPath}/carts_order_confirm?goodsid="+goodsid;
+    }
+
+    function toCartsConfirmAll(){
+        window.location.href="${pageContext.request.contextPath}/carts_order_confirm?goodsid=0";
     }
 
     <%--function toCartsConfirm(object) {--%>

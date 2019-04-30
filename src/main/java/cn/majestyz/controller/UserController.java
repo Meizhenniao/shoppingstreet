@@ -45,8 +45,6 @@ public class UserController {
         }
     }
 
-
-
 //    2.仅负责跳转
     //入登录页面
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -83,4 +81,13 @@ public class UserController {
         return "index";
     }
 
+    //3 既不跳转也不数据库交互，仅给js传数据
+    @RequestMapping(value = "/get_userimformation",method = RequestMethod.GET)
+    @ResponseBody
+    public Msg getUserImformation(HttpSession session){
+        TUser user = (TUser) session.getAttribute("user");
+        System.out.println("getUserImformation");
+        System.out.println(user.toString());
+        return Msg.success().add("user",user);
+    }
 }

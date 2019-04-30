@@ -34,7 +34,15 @@ public class TCartitemServiceImpl implements TCartitemService{
     public List<TCartitem> getCartitemsByUserId(int userid) {
         TCartitemExample example =new TCartitemExample();
         example.createCriteria().andUseridEqualTo(userid);
-        return cartitemMapper.selectByExample(example);
+        List<TCartitem> result= cartitemMapper.selectByExample(example);
+        return result;
+    }
+
+    @Override
+    public TCartitem getCartitemByGoodsidAndUserid(int userid, int goodsid) {
+        TCartitemExample example =new TCartitemExample();
+        example.createCriteria().andUseridEqualTo(userid).andGoodsidEqualTo(goodsid);
+        return cartitemMapper.selectByExample(example).get(0);
     }
 
     @Override

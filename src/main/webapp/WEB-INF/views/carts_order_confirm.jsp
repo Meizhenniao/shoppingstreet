@@ -20,12 +20,12 @@
     <![endif]-->
 
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
-    <script type="text/javascript" src="js/menu.js"></script>
-
     <%--没有这一行$(function)就执行不了，这个是jquery的库--%>
     <script type="text/javascript" src="js/jquery-1.11.1.min_044d0927.js"></script>
 
-    <%--<script type="text/javascript" src="js/n_nav.js"></script>--%>
+    <script type="text/javascript" src="js/menu.js"></script>
+
+    <script type="text/javascript" src="js/n_nav.js"></script>
 
     <script type="text/javascript" src="js/select.js"></script>
 
@@ -58,7 +58,7 @@
                 <div class="two_t">
                     <span class="fr"><a href="#">修改</a></span>商品列表
                 </div>
-                <table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
+                <table  id="cartitem_lists3"  border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="car_th" width="550">商品名称</td>
                         <td class="car_th" width="140">属性</td>
@@ -66,71 +66,12 @@
                         <td class="car_th" width="130">小计</td>
                         <td class="car_th" width="140">返还积分</td>
                     </tr>
-                    <tr>
-                        <td>
-                            <div class="c_s_img"><img src="images/c_1.jpg" width="73" height="73" /></div>
-                            Rio 锐澳 水蜜桃味白兰地鸡尾酒（预调酒） 275ml
-                        </td>
-                        <td align="center">颜色：灰色</td>
-                        <td align="center">1</td>
-                        <td align="center" style="color:#ff4e00;">￥620.00</td>
-                        <td align="center">26R</td>
-                    </tr>
-                    <tr class="car_tr">
-                        <td>
-                            <div class="c_s_img"><img src="images/c_2.jpg" width="73" height="73" /></div>
-                            Rio 锐澳 水蜜桃味白兰地鸡尾酒（预调酒） 275ml
-                        </td>
-                        <td align="center">颜色：灰色</td>
-                        <td align="center">1</td>
-                        <td align="center" style="color:#ff4e00;">￥620.00</td>
-                        <td align="center">26R</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="c_s_img"><img src="images/c_3.jpg" width="73" height="73" /></div>
-                            Rio 锐澳 水蜜桃味白兰地鸡尾酒（预调酒） 275ml
-                        </td>
-                        <td align="center">颜色：灰色</td>
-                        <td align="center">1</td>
-                        <td align="center" style="color:#ff4e00;">￥620.00</td>
-                        <td align="center">26R</td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" align="right" style="font-family:'Microsoft YaHei';">
-                            商品总价：￥1899.00 ； 返还积分 56R
-                        </td>
-                    </tr>
                 </table>
 
                 <div class="two_t">
                     <span class="fr"><a href="#">修改</a></span>收货人信息
                 </div>
-                <table border="0" class="peo_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td class="p_td" width="160">商品名称</td>
-                        <td width="395">海贼王</td>
-                        <td class="p_td" width="160">电子邮件</td>
-                        <td width="395">12345678@qq.com</td>
-                    </tr>
-                    <tr>
-                        <td class="p_td">详细信息</td>
-                        <td>四川省成都市武侯区</td>
-                        <td class="p_td">邮政编码</td>
-                        <td>6011111</td>
-                    </tr>
-                    <tr>
-                        <td class="p_td">电话</td>
-                        <td></td>
-                        <td class="p_td">手机</td>
-                        <td>18600002222</td>
-                    </tr>
-                    <tr>
-                        <td class="p_td">标志建筑</td>
-                        <td></td>
-                        <td class="p_td">最佳送货时间</td>
-                        <td></td>
-                    </tr>
+                <table id="userimfo" border="0" class="peo_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
                 </table>
 
 
@@ -187,296 +128,191 @@
                     <li>支付宝<div class="ch_img"></div></li>
                 </ul>
 
-                <div class="two_t">
-                    商品包装
-                </div>
-                <table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td class="car_th" width="80"></td>
-                        <td class="car_th" width="490">名称</td>
-                        <td class="car_th" width="180">费用</td>
-                        <td class="car_th" width="180">免费额度</td>
-                        <td class="car_th" width="180">图片</td>
-                    </tr>
-                    <tr>
-                        <td align="center"><input type="checkbox" name="pack" checked="checked" /></td>
-                        <td><b style="font-size:14px;">不要包装</b></td>
-                        <td align="center">￥15.00</td>
-                        <td align="center">￥0.00</td>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td align="center"><input type="checkbox" name="pack" /></td>
-                        <td><b style="font-size:14px;">精品包装</b></td>
-                        <td align="center">￥15.00</td>
-                        <td align="center">￥0.00</td>
-                        <td align="center"><a href="#" style="color:#ff4e00;">查看</a></td>
-                    </tr>
+                <table id="sumToPay" border="0" style="width:900px; margin-top:20px;" cellspacing="0" cellpadding="0">
                 </table>
-
-                <div class="two_t">
-                    祝福贺卡
-                </div>
-                <table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td class="car_th" width="80"></td>
-                        <td class="car_th" width="490">名称</td>
-                        <td class="car_th" width="180">费用</td>
-                        <td class="car_th" width="180">免费额度</td>
-                        <td class="car_th" width="180">图片</td>
-                    </tr>
-                    <tr>
-                        <td align="center"><input type="checkbox" name="wish" checked="checked" /></td>
-                        <td><b style="font-size:14px;">不要贺卡</b></td>
-                        <td align="center">￥15.00</td>
-                        <td align="center">￥0.00</td>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td align="center" style="border-bottom:0; padding-bottom:0;"><input type="checkbox" name="wish" /></td>
-                        <td style="border-bottom:0; padding-bottom:0;"><b style="font-size:14px;">祝福贺卡</b></td>
-                        <td align="center" style="border-bottom:0; padding-bottom:0;">￥15.00</td>
-                        <td align="center" style="border-bottom:0; padding-bottom:0;">￥0.00</td>
-                        <td align="center" style="border-bottom:0; padding-bottom:0;"><a href="#" style="color:#ff4e00;">查看</a></td>
-                    </tr>
-                    <tr valign="top">
-                        <td align="center"></td>
-                        <td colspan="4">
-                            <span class="fl"><b style="font-size:14px;">祝福语：</b></span>
-                            <span class="fl"><textarea class="add_txt" style="width:860px; height:50px;"></textarea></span>
-                        </td>
-                    </tr>
-                </table>
-
-                <div class="two_t">
-                    其他信息
-                </div>
-                <table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td width="145" align="right" style="padding-right:0;"><b style="font-size:14px;">使用红包：</b></td>
-                        <td>
-                            <span class="fl" style="margin-left:50px; margin-right:10px;">选择已有红包</span>
-                            <select class="jj" name="city">
-                                <option value="0" selected="selected">请选择</option>
-                                <option value="1">50元</option>
-                                <option value="2">30元</option>
-                                <option value="3">20元</option>
-                                <option value="4">10元</option>
-                            </select>
-                            <span class="fl" style="margin-left:50px; margin-right:10px;">或者输入红包序列号</span>
-                            <span class="fl"><input type="text" value="" class="c_ipt" style="width:220px;" />
-                        <span class="fr" style="margin-left:10px;"><input type="submit" value="验证红包" class="btn_tj" /></span>
-                        </td>
-                    </tr>
-                    <tr valign="top">
-                        <td align="right" style="padding-right:0;"><b style="font-size:14px;">订单附言：</b></td>
-                        <td style="padding-left:0;"><textarea class="add_txt" style="width:860px; height:50px;"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td align="right" style="padding-right:0;"><b style="font-size:14px;">缺货处理：</b></td>
-                        <td>
-                            <label class="r_rad"><input type="checkbox" name="none" checked="checked" /></label><label class="r_txt" style="margin-right:50px;">等待所有商品备齐后再发</label>
-                            <label class="r_rad"><input type="checkbox" name="none" /></label><label class="r_txt" style="margin-right:50px;">取下订单</label>
-                            <label class="r_rad"><input type="checkbox" name="none" /></label><label class="r_txt" style="margin-right:50px;">与店主协商</label>
-                        </td>
-                    </tr>
-                </table>
-
-                <table border="0" style="width:900px; margin-top:20px;" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td align="right">
-                            该订单完成后，您将获得 <font color="#ff4e00">1815</font> 积分 ，以及价值 <font color="#ff4e00">￥0.00</font> 的红包 <br />
-                            商品总价: <font color="#ff4e00">￥1815.00</font>  + 配送费用: <font color="#ff4e00">￥15.00</font>
-                        </td>
-                    </tr>
-                    <tr height="70">
-                        <td align="right">
-                            <b style="font-size:14px;">应付款金额：<span style="font-size:22px; color:#ff4e00;">￥2899</span></b>
-                        </td>
-                    </tr>
-                    <tr height="70">
-                        <td align="right"><a href="#"><img src="images/btn_sure.gif" /></a></td>
-                    </tr>
-                </table>
-
-
 
             </div>
         </div>
         <!--End 第二步：确认订单信息 End-->
 
-
         <!--Begin Footer Begin -->
-        <div class="b_btm_bg bg_color">
-            <div class="b_btm">
-                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td width="72"><img src="images/b1.png" width="62" height="62" /></td>
-                        <td><h2>正品保障</h2>正品行货  放心购买</td>
-                    </tr>
-                </table>
-                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td width="72"><img src="images/b2.png" width="62" height="62" /></td>
-                        <td><h2>满38包邮</h2>满38包邮 免运费</td>
-                    </tr>
-                </table>
-                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td width="72"><img src="images/b3.png" width="62" height="62" /></td>
-                        <td><h2>天天低价</h2>天天低价 畅选无忧</td>
-                    </tr>
-                </table>
-                <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:30px;" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td width="72"><img src="images/b4.png" width="62" height="62" /></td>
-                        <td><h2>准时送达</h2>收货时间由你做主</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="b_nav">
-            <dl>
-                <dt><a href="#">新手上路</a></dt>
-                <dd><a href="#">售后流程</a></dd>
-                <dd><a href="#">购物流程</a></dd>
-                <dd><a href="#">订购方式</a></dd>
-                <dd><a href="#">隐私声明</a></dd>
-                <dd><a href="#">推荐分享说明</a></dd>
-            </dl>
-            <dl>
-                <dt><a href="#">配送与支付</a></dt>
-                <dd><a href="#">货到付款区域</a></dd>
-                <dd><a href="#">配送支付查询</a></dd>
-                <dd><a href="#">支付方式说明</a></dd>
-            </dl>
-            <dl>
-                <dt><a href="#">会员中心</a></dt>
-                <dd><a href="#">资金管理</a></dd>
-                <dd><a href="#">我的收藏</a></dd>
-                <dd><a href="#">我的订单</a></dd>
-            </dl>
-            <dl>
-                <dt><a href="#">服务保证</a></dt>
-                <dd><a href="#">退换货原则</a></dd>
-                <dd><a href="#">售后服务保证</a></dd>
-                <dd><a href="#">产品质量保证</a></dd>
-            </dl>
-            <dl>
-                <dt><a href="#">联系我们</a></dt>
-                <dd><a href="#">网站故障报告</a></dd>
-                <dd><a href="#">购物咨询</a></dd>
-                <dd><a href="#">投诉与建议</a></dd>
-            </dl>
-            <div class="b_tel_bg">
-                <a href="#" class="b_sh1">新浪微博</a>
-                <a href="#" class="b_sh2">腾讯微博</a>
-                <p>
-                    服务热线：<br />
-                    <span>400-123-4567</span>
-                </p>
-            </div>
-            <div class="b_er">
-                <div class="b_er_c"><img src="images/er.gif" width="118" height="118" /></div>
-                <img src="images/ss.png" />
-            </div>
-        </div>
-        <div class="btmbg">
-            <div class="btm">
-                备案/许可证编号：京ICP备070360号   Copyright © 2016-2019 购物街 All Rights Reserved. 复制必究 , Technical Support: ICT Group <br />
-                <img src="images/b_1.gif" width="98" height="33" /><img src="images/b_2.gif" width="98" height="33" /><img src="images/b_3.gif" width="98" height="33" /><img src="images/b_4.gif" width="98" height="33" /><img src="images/b_5.gif" width="98" height="33" /><img src="images/b_6.gif" width="98" height="33" />
-            </div>
-        </div>
+        <%@ include file="/WEB-INF/views/include/footer.jsp" %>
         <!--End Footer End -->
     </div>
 
 </body>
 
-
 <script type="text/javascript">
-    <%--$(function () {--%>
-        <%--showCartOrderConfirmList(queryString("goodsid"));--%>
-    <%--})--%>
 
-    <%--function queryString(key) {//解出keyword的值--%>
-        <%--key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars--%>
-        <%--var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));--%>
-        <%--return match && decodeURIComponent(match[1].replace(/\+/g, " "));--%>
-    <%--}--%>
-    <%--function showCartOrderConfirmList(goodsid) {--%>
-        <%--$.ajax({--%>
-            <%--url: "${pageContext.request.contextPath}/query_cartitems_goodsid",--%>
-            <%--type: "GET",--%>
-            <%--data:"goodsid="+goodsid,--%>
-            <%--success: function (result) {--%>
-                <%--if(result.code == 1){--%>
-                    <%--var carts = result.extend.cartitems;//遍历msg中存的数据--%>
-                    <%--if (carts.length == 0) {//购物车个数为0--%>
-                        <%--alert("???")--%>
-                    <%--} else {--%>
-                        <%--var price_sum = 0;--%>
-                        <%--$.each(carts, function (index, item) {--%>
-                            <%--price_sum += item.goodsamount * item.goods.price;--%>
-<%--//                            alert("开始遍历")--%>
-                            <%--var imageAndName = $("" +--%>
-                                <%--"<td  class=\"car_th\" width=\"490\"align=\"center\"> " +--%>
-                                <%--"   <div class=\"c_s_img\"><img src=\"/images/"+item.goods.indexphotourl+"\" width=\"73\" height=\"73\" /></div>" +item.goods.goodsname+--%>
-                                <%--"</td> " )--%>
+    $(function () {
+        alert("开始carts_order_confirm页面的操作")
+        showCartOrderConfirmList(queryString("goodsid"));
+        showUserImformation();
+    })
 
-                            <%--var color=$("<td class=\"car_th\" width=\"140\" align=\"center\">颜色：灰色</td> ")--%>
-                            <%--var addAndSub=$("" +--%>
-                                <%--"<td class=\"car_th\" width=\"150\"align=\"center\"> " +--%>
-                                <%--"   <div class=\"c_num\">" +--%>
-                                <%--"       <input type=\"button\" onclick=\"subToCart(jq(this)," +item.goodsid +--%>
-                                <%--");\" class=\"car_btn_1\" />" +--%>
-                                <%--"       <input type=\"text\" value=\"" + item.goodsamount +"\" class=\"car_ipt\" /> " +--%>
-                                <%--"       <input type=\"button\"  onclick=\"addToCart(jq(this)," + +item.goodsid +--%>
-                                <%--");\" class=\"car_btn_2\" />" +--%>
-                                <%--"   </div> " +--%>
-                                <%--"</td> ")--%>
-<%--//                            var price= $("￥" + item.goods.price)--%>
-                            <%--var price= $("" +--%>
-                                <%--"<td  class=\"car_th\" width=\"130\" align=\"center\" style=\"color:#ff4e00;\">￥" + item.goods.price + "</td> ")--%>
-<%--//                            var jifen=$("26R")--%>
-                            <%--var jifen=$("<td class=\"car_th\" width=\"140\" align=\"center\">26R</td> ")--%>
-<%--//                            var delOrBuy=$("<a href=\"#\">删除</a>&nbsp; &nbsp;<a href=\"#\">购买</a>")--%>
-                            <%--var delOrBuy=$("" +--%>
-                                <%--"<td class=\"car_th\" width=\"150\" align=\"center\">" +--%>
-                                <%--"   <a href=\"#\" onclick=\"delToCart(" + item.goodsid +--%>
-                                <%--")\">删除</a>&nbsp; &nbsp;<a href=\"/carts_order_confirm?goodsid=" + item.goodsid +--%>
-                                <%--"\">购买</a>" +--%>
-                                <%--"</td>")--%>
-<%--//???在jq里面的jq里面不用再加$  {pageContext.request.contextPath}--%>
-                            <%--$("<tr></tr>").append(imageAndName)--%>
-                                <%--.append(color)--%>
-                                <%--.append(addAndSub)--%>
-                                <%--.append(price)--%>
-                                <%--.append(jifen)--%>
-                                <%--.append(delOrBuy)--%>
-                                <%--.appendTo("#cartitem_lists2")--%>
-                        <%--})--%>
-                        <%--var total = $("" +--%>
-                            <%--"<td colspan=\"6\" style=\"font-family:'Microsoft YaHei'; border-bottom:0;\"> " +--%>
-                            <%--"   <label onclick=\"delAllCarts()\" class=\"r_txt\">清空购物车</label> " +--%>
-                            <%--"   <span class=\"fr\">商品总价：<b style=\"font-size:22px; color:#ff4e00;\">￥"+price_sum+"</b></span>" +--%>
-                            <%--"   <div id=\"cartitem_totalprice2\" class=\"price_sum\"> </div> " +--%>
-                            <%--"</td>")--%>
-                        <%--$("<tr></tr>").append(total)--%>
-                            <%--.appendTo("#cartitem_lists2")--%>
-                        <%--var buytotal = $("" +--%>
-                            <%--"<td colspan=\"6\" align=\"right\">" +--%>
-                            <%--"   <a href=\"#\"><img src=\"images/buy1.gif\" /></a>&nbsp; &nbsp; " +--%>
-                            <%--"   <a href=\"#\"><img src=\"images/buy2.gif\" /></a> " +--%>
-                            <%--"</td>")--%>
-                        <%--$("<tr></tr>").append(buytotal)--%>
-                            <%--.appendTo("#cartitem_lists2")--%>
-                    <%--}--%>
-                <%--}else{--%>
+    function queryString(key) {//解出keyword的值
+        alert("可以进入queryString(key)");
+        key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+        var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
+        alert("match="+match);
+        return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+    }
 
-                <%--}--%>
-            <%--}--%>
-        <%--})--%>
+    function showCartOrderConfirmList(goodsid) {
+        alert("goodsid="+goodsid);
+        if(goodsid == 0){
+            showCartOrderConfirmListAll();
+        }else{
+            showCartOrderConfirmListSingle(goodsid);
+        }
+    }
 
-    <%--}--%>
+    function showCartOrderConfirmListAll() {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/query_cartitems",
+            type: "GET",
+            success: function (result) {
+                if(result.code == 1){
+                    var carts = result.extend.cartitems;//遍历msg中存的数据
+                    if (carts.length == 0) {//购物车个数为0
+                        alert("您的购物车没有任何商品")
+                    } else {
+                        var price_sum = 0;
+                        //                              alert("开始遍历")
+                        $.each(carts, function (index, item) {
+                            price_sum += item.goodsamount * item.goods.price;
+                            var imageAndName = $("" +
+                                "<td  class=\"car_th\" width=\"490\"  align=\"center\"> " +
+                                "   <div class=\"c_s_img\"><img src=\"/images/"+item.goods.indexphotourl+"\" width=\"73\" height=\"73\" /></div>" +item.goods.goodsname+
+                                "</td> " );
+                            var color = $("<td  class=\"car_th\" align=\"center\">颜色：灰色</td> ");
+                            var amount = $("<td  class=\"car_th\" align=\"center\"> " +  item.goodsamount + "</td> ");
+                            var price = $("<td  class=\"car_th\" align=\"center\" style=\"color:#ff4e00;\">￥" + item.goods.price + "</td> ");
+                            var jifen=$("<td class=\"car_th\" align=\"center\">26R</td> ");
+
+                            $("<tr></tr>").append(imageAndName)
+                                .append(color)
+                                .append(amount)
+                                .append(price)
+                                .append(jifen)
+                                .appendTo("#cartitem_lists3");
+                        })
+
+                        var sumToPaysum = $("<td align=\"right\"> <b style=\"font-size:14px;\">应付款金额：<span style=\"font-size:22px; color:#ff4e00;\">￥" + price_sum+"</span></b></td>");
+
+                        var sumToPayphoto = $(" <td align=\"right\"><a href=\"#\"><img onclick=\"confirmToOrderOneByOne(" + carts+")\" src=\"images/btn_sure.gif\" /></a></td>");
+
+                        $("<tr></tr>").append(sumToPaysum)
+                            .appendTo("#sumToPay")
+                        $("<tr></tr>").append(sumToPayphoto)
+                            .appendTo("#sumToPay")
+                    }
+                }else{
+                    alert(result.msg)
+                }
+            }
+        })
+    }
+
+    function showCartOrderConfirmListSingle(goodsid) {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/query_cartitem_goodsid",
+            type: "GET",
+            data:"goodsid="+goodsid,
+            success: function (result) {
+                if(result.code == 1){
+                    alert("result.code=1");
+                    var cartitem = result.extend.cartitem;//遍历msg中存的数据
+                    if (cartitem == null) {//没有
+                        alert("没有了")
+                    } else {
+//                            alert("cartitem != null")
+                        var imageAndName = $("" +
+                            "<td  class=\"car_th\" width=\"490\"  align=\"center\"> " +
+                            "   <div class=\"c_s_img\"><img src=\"/images/" + cartitem.goods.indexphotourl + "\" width=\"73\" height=\"73\" /></div>" + cartitem.goods.goodsname +
+                            "</td> ");
+
+                        var color = $("<td  class=\"car_th\" align=\"center\">颜色：灰色</td> ");
+                        var amount = $("" +
+                            "<td  class=\"car_th\" align=\"center\"> " + cartitem.goodsamount +
+                            "</td> ");
+                        var price = $("" +
+                            "<td  class=\"car_th\" align=\"center\" style=\"color:#ff4e00;\">￥" + cartitem.goods.price + "</td> ");
+
+                        var jifen = $("<td  class=\"car_th\" align=\"center\">26R</td> ");
+
+                        $("<tr></tr>").append(imageAndName)
+                            .append(color)
+                            .append(amount)
+                            .append(price)
+                            .append(jifen)
+                            .appendTo("#cartitem_lists3");
+
+                        var sumToPaysum = $("<td align=\"right\"> <b style=\"font-size:14px;\">应付款金额：<span style=\"font-size:22px; color:#ff4e00;\">￥" + cartitem.goodsamount*cartitem.goods.price+"</span></b></td>");
+
+                        var sumToPayphoto = $(" <td align=\"right\"><img onclick=\"confirmToOrder(" +cartitem+
+                            ")\" src=\"images/btn_sure.gif\" /></td>");
+                        $("<tr></tr>").append(sumToPaysum)
+                            .appendTo("#sumToPay");
+                        $("<tr></tr>").append(sumToPayphoto)
+                            .appendTo("#sumToPay");
+                    }
+                }else{
+                    alert(result.msg);
+                }
+            }
+        })
+    }
+
+    function showUserImformation(){
+        alert("yes,showUserImformation");
+        $.ajax({
+            url:"${pageContext.request.contextPath}/get_userimformation",
+            type:"GET",
+            success:function (result) {
+                if(result.code == 1){
+                    alert("code =1");
+                    var user = result.extend.user;
+                    alert("showUserImformation userid="+user.id);
+                    var first = ""+
+                        "<td class=\"p_td\" width=\"160\" align=\"left\">用户名</td> <td width=\"395\">"+user.username+"</td> " +
+                        "<td class=\"p_td\" width=\"160\" align=\"left\">电子邮件</td> <td width=\"395\">"+user.email+"</td>";
+                    var second = "" +
+                        "<td class=\"p_td\" align=\"left\">地址</td> <td>四川省成都市武侯区</td> " +
+                        "<td class=\"p_td\" align=\"left\">电话</td> <td>" + user.tel +"</td>";
+                    $("<tr></tr>").append(first)
+                        .appendTo("#userimfo");
+                    $("<tr></tr>").append(second)
+                        .appendTo("#userimfo");
+                }
+            }
+        })
+    }
+
+    function confirmToOrderOneByOne(carts) {
+//        $.each(carts, function (index, item) {
+//            confirmToOrder(item)
+//        }
+    }
+
+    function confirmToOrder(cartitem) {
+        alert("you are going to confirmOrder create an order");
+        $.ajax({
+            url:"${pageContext.request.contextPath}/add_order",
+            type:"POST",
+            dataType:"json",
+            data:{
+                goodsid:cartitem.goodsid,
+                goodsamount:cartitem.goodsamount,
+            },
+            success:function (result) {
+                if(result.code == 1){
+                    alert("result.code = "+result.code);
+                    windows.location.href="${pageContext.request.contextPath}/carts_order_submit";
+                }
+            }
+        })
+    }
+
 </script>
 </html>

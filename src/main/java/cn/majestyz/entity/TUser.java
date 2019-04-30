@@ -50,4 +50,9 @@ public class TUser {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "TUser{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", tel='" + tel + '\'' + ", email='" + email + '\'' + '}';
+    }
 }

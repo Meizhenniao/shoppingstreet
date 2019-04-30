@@ -15,6 +15,8 @@ public interface TCartitemService {
     //获取某用户的购物车列表
     List<TCartitem> getCartitemsByUserId(int userid);
 
+    TCartitem getCartitemByGoodsidAndUserid(int userid, int goodsid);
+
     //Cartitem表中判断商品原来在不在某人的购物车里
     TCartitem queryCartItem(int goodsid, int userid);
 
@@ -36,4 +38,5 @@ public interface TCartitemService {
     boolean delGoodsInCart(int goodsid, int userid);
 
     boolean delAllCarts(int userid);
+
 }

@@ -19,10 +19,10 @@
     </script>
     <![endif]-->
 
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <%--没有这一行$(function)就执行不了，这个是jquery的库--%>
     <script type="text/javascript" src="js/jquery-1.11.1.min_044d0927.js"></script>
 
-    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>
 
     <script type="text/javascript" src="js/lrscroll_1.js"></script>

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.1.min_044d0927.js"></script>
 <script type="text/javascript" src="js/a_cartslist_pre.js"></script><%--负责购物车的js--%>
 <script type="text/javascript" src="js/a_logout.js"></script><%--负责退出登录--%>
 <script type="text/javascript" src="js/n_nav.js"></script> <%--负责全部商品列表--%>
@@ -150,7 +151,7 @@
         <span class="fl"><a href="#">咖啡</a><a href="#">iphone 6S</a><a href="#">新鲜美食</a><a href="#">蛋糕</a><a href="#">日用品</a><a href="#">连衣裙</a></span>
     </div>
 
-    <%--start 购物车下拉列表 --%>
+    <%--start 购物车小列表 --%>
     <div class="i_car">
         <div id="cartitem_amount" onclick="toCartsBrowse()" class="car_t">购物车 [ <span>0</span> ]</div>
         <div class="car_bg">
@@ -171,7 +172,7 @@
             <div id="paytobuy" class="price_a"><a href="${pageContext.request.contextPath}/carts_browse">去购物车结算</a></div>
         </div>
     </div>
-    <%--end  购物车下拉列表--%>
+    <%--end  购物车小列表--%>
 </div>
 <script type="text/javascript">
 
