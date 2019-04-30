@@ -22,7 +22,7 @@ public class CartsController {
     TCartitemService cartitemService;
 
     // 1. 数据库交互
-    @RequestMapping(value = "/get_cartitems", method = RequestMethod.GET)//为什么是GET???
+    @RequestMapping(value = "/query_cartitems", method = RequestMethod.GET)//为什么是GET???
     @ResponseBody
     public Msg getCartitems(HttpSession session) {//???什么时候需要写@RequestParam
         System.out.println("你在getCartitems方法中");
@@ -101,6 +101,7 @@ public class CartsController {
 
     }
 
+
     @RequestMapping(value = "/del_cart",method = RequestMethod.POST)
     @ResponseBody
     public Msg delGoodsInCart(int goodsid,HttpSession session){
@@ -113,6 +114,7 @@ public class CartsController {
             return Msg.fail();
         }
     }
+
 
     @RequestMapping(value = "/del_allcarts",method = RequestMethod.POST)
     @ResponseBody
@@ -144,6 +146,7 @@ public class CartsController {
     public String toCartsBrowse(){
         return "carts_browse";
     }
+
 
     @RequestMapping(value = "/carts_oder_confirm",method = RequestMethod.GET)
     public String toCartsOrderConfirm(){

@@ -131,9 +131,9 @@ function subToCart(jian,goodsid){
         })
     }else if(a==1){
         alert("a==1");
-        var yesorno = confirm("是否确定清空购物车");
+        var yesorno = confirm("是否确定删除这项购物车");
         if(yesorno) {
-            alert("我准备要删除了")
+            // alert("我准备要删除了")
             delToCart(goodsid);
             window.location.reload();//删除后
         }

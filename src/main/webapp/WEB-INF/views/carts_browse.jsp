@@ -184,7 +184,7 @@
 
     function showBigCartList() {
         $.ajax({
-            url: "${pageContext.request.contextPath}/get_cartitems",
+            url: "${pageContext.request.contextPath}/query_cartitems",
             type: "GET",
             success: function (result) {
                 if(result.code == 1){
@@ -208,16 +208,13 @@
                                 "       <input type=\"button\" onclick=\"subToCart(jq(this)," +item.goodsid +
                                 ");\" class=\"car_btn_1\" />" +
                                 "       <input type=\"text\" value=\"" + item.goodsamount +"\" class=\"car_ipt\" /> " +
-                                "       <input type=\"button\"  onclick=\"addToCart(jq(this)," + +item.goodsid +
+                                "       <input type=\"button\"  onclick=\"addToCart(jq(this),"  +item.goodsid +
                                 ");\" class=\"car_btn_2\" />" +
                                 "   </div> " +
                                 "</td> ")
-//                            var price= $("￥" + item.goods.price)
                             var price= $("" +
                                 "<td  class=\"car_th\" width=\"130\" align=\"center\" style=\"color:#ff4e00;\">￥" + item.goods.price + "</td> ")
-//                            var jifen=$("26R")
                             var jifen=$("<td class=\"car_th\" width=\"140\" align=\"center\">26R</td> ")
-//                            var delOrBuy=$("<a href=\"#\">删除</a>&nbsp; &nbsp;<a href=\"#\">购买</a>")
                             var delOrBuy=$("" +
                                 "<td class=\"car_th\" width=\"150\" align=\"center\">" +
                                 "   <a href=\"#\" onclick=\"delToCart(" + item.goodsid +
@@ -256,6 +253,7 @@
         })
 
     }
+
     <%--function toCartsConfirm(object) {--%>
         <%--$.ajax({--%>
             <%--url:"${pageContext.request.contextPath}/carts_order_confirm?item=",--%>

@@ -8,7 +8,7 @@ jq(function () {
 
 function showSmallCartList() {
     jq.ajax({
-        url: "/get_cartitems",
+        url: "/query_cartitems",
         type: "GET",
         success: function (result) {
             jq("#cartitem_amount").html("购物车 [ <span>0</span> ]");//购物车数量
