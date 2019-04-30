@@ -313,7 +313,7 @@
             success:function (result) {
                 if(result.code == 1){
                     alert("result.code = "+result.code);
-                    windows.location.href="${pageContext.request.contextPath}/carts_order_submit";
+                    window.location.href="${pageContext.request.contextPath}/carts_order_submit";
                 }
             }
         })
