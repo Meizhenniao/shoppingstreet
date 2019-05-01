@@ -22,6 +22,7 @@
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/jquery-1.11.1.min_044d0927.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>
+    <script type="text/javascript" src="js/a_cartslist_pre.js"></script><%--负责购物车的js--%>
 
     <script type="text/javascript" src="js/select.js"></script>
 
@@ -118,7 +119,7 @@
                         <a href="${pageContext.request.contextPath}/logout" style="color:#ff4e00;">退出</a>
                         &nbsp;
                         |&nbsp;
-                        <a href="#">我的订单</a>
+                        <a href="${pageContext.request.contextPath}/menber_order">我的订单</a>
                         &nbsp;|
                     </c:if>
                     <c:if test="${sessionScope.user == null}">
@@ -223,7 +224,7 @@
                 <div class="left_m">
                     <div class="left_m_t t_bg1">订单中心</div>
                     <ul>
-                        <li><a href="Member_Order.html">我的订单</a></li>
+                        <li><a href="${pageContext.request.contextPath}/menber_order">我的订单</a></li>
                         <li><a href="Member_Address.html">收货地址</a></li>
                         <li><a href="#">缺货登记</a></li>
                         <li><a href="#">跟踪订单</a></li>
@@ -331,7 +332,17 @@
 
 
 
-<script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js">
+<script type="text/javascript">
+
+    //mz  在goods_searchresult页面继续搜索
+    $("#start_search").click(function () {
+        //获取参数
+        if($("#keyword").val() == ""){
+            alert("搜索内容不能为空");
+            return false;//???return false是什么意思，重新返回这一页面吗
+        }
+        window.location.href = "${pageContext.request.contextPath}/goods_searchresult?keyword=" + $("#keyword").val();//???这是什么方式的传参啊   RequestParam的传参
+    })
 
 </script>
 

@@ -86,6 +86,11 @@ public class OrderController {
         return "carts_order_submit";
     }
 
+    @RequestMapping(value = "/menber_order",method = RequestMethod.GET)//注册要用POST
+    public String toMenberOrder(){//json格式获取请求对象
+        System.out.println("toMenberOrder");
+        return "menber_order";
+    }
 
     public String getExpressNumber(){
         SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");

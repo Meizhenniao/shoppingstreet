@@ -97,7 +97,7 @@
                     <a href="${pageContext.request.contextPath}/logout" style="color:#ff4e00;">退出</a>
                     &nbsp;
                     |&nbsp;
-                    <a href="#">我的订单</a>
+                    <a href="${pageContext.request.contextPath}/menber_order">我的订单</a>
                     &nbsp;|
                 </c:if>
                 <c:if test="${sessionScope.user == null}">
@@ -174,6 +174,7 @@
     </div>
     <%--end  购物车小列表--%>
 </div>
+
 <script type="text/javascript">
 
     //mz  在goods_searchresult页面继续搜索
