@@ -11,9 +11,9 @@ function addUpdate(jia){
 
 function jianUpdate(jian){
     var c = jian.parent().find(".n_ipt").val();
-    if(c==0){
+    if(c==1){
         alert("不能再减少了")
-        c=0;
+        c=1;
     }else{
         c=parseInt(c)-1;
         jian.parent().find(".n_ipt").val(c);
@@ -28,8 +28,9 @@ function addUpdate1(jia){
 
 function jianUpdate1(jian){
     var c = jian.parent().find(".car_ipt").val();
-    if(c==0){
-        c=0;
+    if(c==1){
+        alert("不能再减少了")
+        c=1;
     }else{
         c=parseInt(c)-1;
         jian.parent().find(".car_ipt").val(c);
